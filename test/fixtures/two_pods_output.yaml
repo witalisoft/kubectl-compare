@@ -1,0 +1,213 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/psp: eks.privileged
+    creationTimestamp: "2023-01-25T13:44:51Z"
+    labels:
+      run: kuttle
+    name: kuttle
+    namespace: default
+    resourceVersion: "150398161"
+    uid: 22d1b6b4-d690-4091-bbe5-50f37269ebe9
+  spec:
+    containers:
+    - args:
+      - sh
+      - -c
+      - apk add python3 --update && exec tail -f /dev/null
+      image: alpine:latest
+      imagePullPolicy: Always
+      name: kuttle
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-bpfwg
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-10-210-174-117.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Never
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-bpfwg
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-25T13:44:51Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-25T13:44:52Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-25T13:44:52Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-01-25T13:44:51Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://dd56d563c0118d78b1bf6a36acd4e1065a1216731b94cc64896c8fed757957fd
+      image: alpine:latest
+      imageID: docker-pullable://alpine@sha256:f271e74b17ced29b915d351685fd4644785c6d1559dd1f2d4189a5e851ef753a
+      lastState: {}
+      name: kuttle
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-01-25T13:44:52Z"
+    hostIP: 10.200.155.120
+    phase: Running
+    podIP: 10.200.144.173
+    podIPs:
+    - ip: 10.200.144.173
+    qosClass: BestEffort
+    startTime: "2023-01-25T13:44:51Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubernetes.io/psp: eks.privileged
+    creationTimestamp: "2023-02-24T10:04:38Z"
+    labels:
+      run: kuttle2
+    name: kuttle2
+    namespace: default
+    resourceVersion: "168225579"
+    uid: 428995e4-2300-45cc-9fc0-db735fde68ea
+  spec:
+    containers:
+    - args:
+      - sh
+      - -c
+      - apk add python3 --update && exec tail -f /dev/null
+      image: alpine:3.17
+      imagePullPolicy: IfNotPresent
+      name: kuttle2
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-b5dk6
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-10-210-174-117.ec2.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Never
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-b5dk6
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2023-02-24T10:04:38Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2023-02-24T10:04:40Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2023-02-24T10:04:40Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2023-02-24T10:04:38Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://e9cd55ffc82ac96379d4e8aae90de6e3cc6976d0bf2a90586f551c994b4c6fe4
+      image: alpine:3.17
+      imageID: docker-pullable://alpine@sha256:69665d02cb32192e52e07644d76bc6f25abeb5410edc1c7a81a10ba3f0efb90a
+      lastState: {}
+      name: kuttle2
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2023-02-24T10:04:39Z"
+    hostIP: 10.200.174.117
+    phase: Running
+    podIP: 10.200.166.43
+    podIPs:
+    - ip: 10.200.166.43
+    qosClass: BestEffort
+    startTime: "2023-02-24T10:04:38Z"
+kind: List
+metadata:
+  resourceVersion: ""
